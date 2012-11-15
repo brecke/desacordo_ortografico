@@ -1,0 +1,27 @@
+{
+  "name": "Desacordo ortográfico",
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "description": "Porque a língua é do povo",
+  
+  // Needed to retrieve options from content script
+  //"background": {
+  //  "page": "background.html"
+  //},
+  
+  // Gives access to extension options from Extensions Manager
+  // "options_page": "options.html",
+  
+  // This is how you load Browser Action. Nearly equal to Page one.
+  "browser_action": {
+      "default_icon": "logo.png"
+  },
+  
+  // javascripts
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js" : ["jquery.min.js", "revert_ao.js"]
+    }
+  ]
+}
