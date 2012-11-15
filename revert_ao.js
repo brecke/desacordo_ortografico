@@ -61,14 +61,10 @@ $(document).ready(function() {
   }
   
   var textNodes = getTextNodesIn(document.body);
-  console.log(textNodes);
+  // console.log(textNodes);
   
-  for (var textNode in textNodes) {
-    
-    console.log(textNode)
-    
-    // go through the mappings Object
-    
+  for(var i = 0; i < textNodes.length; i++) {
+    console.log(textNodes[i]); // TODO may contain javascript
   }
   
 });
