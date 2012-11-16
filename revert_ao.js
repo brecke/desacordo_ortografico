@@ -1372,7 +1372,7 @@ var mappings = {
 	'intrarraquidianos': 'intra-raquidianos',
 	'eletrolisaçães': 'electrolisaçães',
 	'sobre-explorações': 'sobreexplorações',
-	's': 'vintém-de-santo-antónios',
+	// 's': 'vintém-de-santo-antónios',
 	'demoliberal': 'demo-liberal',
 	'retrospeção': 'retrospecção',
 	'coeremitas': 'co-eremitas',
@@ -6555,8 +6555,8 @@ var mappings = {
  */
  
 var key = "AIzaSyBYsks1R1ApmgQYkxswsbZi27aZtQqOAvU"
+query = "";
 // var callback = "getLanguage"
-var query = "Cavaco falou aos Portugueses no facebook"
 // var prettyprint = "false"
 var url = "https://www.googleapis.com/language/translate/v2/detect?key=" + key + "&q=" + query
 
@@ -6607,14 +6607,31 @@ $(document).ready(function() {
       var textNodes = [], whitespace = /^\s*$/;
   
       function getTextNodes(node) {
+
           if (node.nodeType == 3) {
-              if (includeWhitespaceNodes || !whitespace.test(node.nodeValue)) {
-                  textNodes.push(node);
+              if (includeWhitespaceNodes || (!whitespace.test(node.textContent))) { // nodeValue
+                textNodes.push(node);
               }
-          } else {
-              for (var i = 0, len = node.childNodes.length; i < len; ++i) {
-                  getTextNodes(node.childNodes[i]);
-              }
+
+          // recursively get the text nodes from other node types:
+          // TYPE 1: ELEMENT_NODE
+          // exception for <script>
+          // exception for <style>
+          // exception for <em>
+          // exception for <i>
+          // exception for <b>
+          // exception for <strong>
+          } else if (node.nodeType == 1 
+            && node.nodeName.toLowerCase() != "script" 
+            && node.nodeName.toLowerCase() != 'style'
+            && node.nodeName.toLowerCase() != 'strong'
+            && node.nodeName.toLowerCase() != 'em'
+            && node.nodeName.toLowerCase() != 'i'
+            && node.nodeName.toLowerCase() != 'b') {
+
+            for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+                getTextNodes(node.childNodes[i]);
+            }
           }
       }
   
@@ -6622,20 +6639,35 @@ $(document).ready(function() {
       return textNodes;
   }
   
-  var textNodes = getTextNodesIn(document.body);
+  // translate the document body
+  var textNodes = getTextNodesIn(document.body, false);
   
   for(var i = 0; i < textNodes.length; i++) {
-    text = textNodes[i].textContent;
+
+    text = $.trim(textNodes[i].textContent);
+    
+    // replace via regex
+    text = text.replace(':', ' ');
+    text = text.replace('...', ' ');
+    text = text.replace('.', ' ');
+    text = text.replace('?', ' ');
+    // text = text.replace('\'', '');
+    text = text.replace('_', ' ');
+    text = text.replace('@', ' ');
+    text = text.replace('"', ' ');
+    text = text.replace(';', ' ');
+    text = text.replace('(', ' ');
+    text = text.replace(')', ' ');
+
+    text = $.trim(text);
     tokens = text.split(/[\s,]+/);
     
     for (var j = 0; j < tokens.length; j++) {
-      word = tokens[j].toLowerCase();
-      replaceWord = mappings[ word ];
+      word = tokens[j];
+      replaceWord = mappings[ word.toLowerCase() ];
        
        if ( replaceWord ) {
            
-           console.log("Replacing " + word + " with " + replaceWord);
-         
            if ( isCapitalized(word) ) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, capitalize( replaceWord ));
            } else if ( isUpperCase(word) ) {
@@ -6651,6 +6683,5 @@ $(document).ready(function() {
 // debug
 var end = new Date().getTime();
 console.log("Extension took " + end - start + "s");
-
 });
 
