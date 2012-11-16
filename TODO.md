@@ -3,10 +3,10 @@ Stuff missing
 
 Bugs:
 
-* tokens
 * plurals
 
 Features:
 
+* word replace animation
 * loading cat while it waits for translation
 * bookmarklet
