@@ -3100,6 +3100,24 @@ $.get(url, { key: key, q: query, prettyprint: "false" }, function(data) {
 // });
  
 $(document).ready(function() {
+
+  function isCapitalized(string) {
+      first = string[0];
+      rest  = string.slice(1);
+      return first==first.toUpperCase() && rest==rest.toLowerCase();
+  }
+  
+  function capitalize(string) {
+      return string[0].toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  function isLowerCase(string) {
+      return string == string.toLowerCase();
+  }
+  
+  function isUpperCase(string) {
+      return string == string.toUpperCase();
+  }
   
   // go through the DOM recursively
   function getTextNodesIn(node, includeWhitespaceNodes) {
@@ -3125,13 +3143,20 @@ $(document).ready(function() {
   // console.log(textNodes);
   
   for(var i = 0; i < textNodes.length; i++) {
-    console.log(textNodes[i]); // TODO may contain javascript
+    word = textNodes[i].textContent;    
+    replaceWord = mappings[ word.toLowerCase() ];
     
-    if (mappings[textNodes[i].toString().toLowerCase()]) {
-      console.log("Replacing " + textNodes[i] + " with " + mappings[textNodes[i]]);
-      textNodes[i] = mappings[textNodes[i]];
-    }
+    if ( replaceWord ) {
+        if ( isCapitalized(word) ) {
+            textNodes[i] = capitalize( replaceWord );
+        } else if ( isUpperCase(words) ) {
+            textNodes[i] = replaceWord.toUpperCase();
+        } else {
+            textNodes[i] = replaceWord.toLowerCase();
+        };
+    };    
   }
+  
 });
 
 
