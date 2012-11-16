@@ -1,4 +1,4 @@
-{
+var mappings = {
 	'bicho do mato': 'bicho-do-mato',
 	'pé de pato': 'pé-de-pato',
 	'antirrábico': 'anti-rábico',
