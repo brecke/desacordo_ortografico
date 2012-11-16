@@ -1,3 +1,6 @@
+// debug
+var start = new Date().getTime();
+
 var mappings = {
   'bicho do mato': 'bicho-do-mato',
   'pé de pato': 'pé-de-pato',
@@ -3155,9 +3158,11 @@ $(document).ready(function() {
        }; 
     }
   }
+
+
+// debug
+var end = new Date().getTime();
+console.log("Extension took " + end - start + "s");
+
 });
-
-
-
-
 
