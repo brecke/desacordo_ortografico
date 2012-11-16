@@ -1,69 +1,31 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import requests, re, simplejson, sys, codecs
+from python_utils.to_feminine import *
+from python_utils.to_plural   import *
 
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
 def dict_to_str(d):
-    x = [u"\t'"+unicode(k)+"': '"+unicode(v)+"',\n" for k,v in d.iteritems() if k and v]
-    return u"var mappings = {\n" + "".join(x) + u"}"
+    l = []
+    for k,v in d.iteritems():
+        if k and v:
+            try:
+                element = u"\t'"+unicode(k)+"': '"+unicode(v)+"',\n"
+                l.append( element )
+            except UnicodeDecodeError:
+                print '|'
+                continue         
+    #l = [u"\t'"+unicode(k)+"': '"+unicode(v)+"',\n" for k,v in d.iteritems() if k and v]
+    return u"var mappings = {\n" + "".join(l) + u"}"
     
 def write_to_file(dic, filename="mappings.js"):
     js_file = codecs.open( filename, "w", "utf-8" )
     js_file.write( dict_to_str(dic) )
     js_file.close()
-    
-def plural(word):
-    if word.endswith("ão"):
-        size = len("ão")
-        return word[:-size]+"ãos", word[:-size]+"ães", word[:-size]+"ões"
-    elif word.endswith("m"):
-        return word[:-1]+"ns",
-    elif word.endswith("il"):
-        return word[:-2]+"is", word[:-2]+"eis"
-    elif word.endswith("al"):
-        if word=="mal": 
-            return "males",
-        elif word=="cal": 
-            return "cales",
-        elif word=="aval": 
-            return "avais",
-        return word[:-1]+"is",
-    elif word.endswith("el"):
-        if word=="mel":
-            return "meles",
-        elif word=="fel":
-            return "feles",
-        return word[:-1]+"is",
-    elif word.endswith("ol"):
-        if word=="mol":
-            return "moles",
-        return word[:-1]+"is",
-    elif word.endswith("ul"):
-        if word=="cônsul":
-            return "cônsules",
-        return word[:-1]+"is",
-    elif word.endswith("r") or word.endswith("z"):
-        return word[:-1]+"es",
-    elif word.endswith("n"):
-        return word+"es", word+"s"
-    elif word.endswith("ens"):
-        return word,
-    elif word.endswith("s"):
-        if word in ["cós", "cais", "xis"]:
-            return word,
-        return word[:-1]+"es",
-    else:
-        return word+"s",
-        
+         
 
-def add_plurals_to_dict(dic):
-    l = []
-    for k,v in dic.iteritems():
-        l += zip( plural( k ), plural( v ) )
-    dic.update( dict( l ) )
-    
 
 url = "http://www.portaldalinguaportuguesa.org/?action=novoacordo&act=list&letter=%s&version=pe"
 alphabet = [chr(i) for i in range(97, 123)]
@@ -83,8 +45,10 @@ for char in alphabet:
         new_words = [ re.findall( new_word_regex, row )[0] for row in table if row ]
         
         words.update( dict( zip(new_words, old_words) ) )
+        add_feminine_to_dict( words )
         add_plurals_to_dict( words )
         all_words.update( words )
+        
     except IndexError:
         continue
        
