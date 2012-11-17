@@ -9021,5 +9021,4 @@ var mappings = {
 	'hipercataletas': 'hipercatalectas',
 	'corregentes': 'co-regentes',
 	'pseudoaticisma': 'pseudo-aticisma',
->>>>>>> b218a66f072350d077ccce1f0e6fe835bdbb6e41
 }
