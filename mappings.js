@@ -1497,6 +1497,8 @@ var mappings = {
 	'vice-diretoras': 'vice-directoras',
 	'seleçãos': 'selecçãos',
 	'detetar': 'detectar',
+	'deteta': 'detecta',
+	'deteto': 'detecto',
 	'bissetor, bissectoes': 'bissectoes',
 	'opticometria': 'opticometria',
 	'antirregionalizações': 'anti-regionalizações',
