@@ -1,6 +1,5 @@
 // debug
 var start = new Date().getTime();
-
 var mappings = {
 	'infecionada': 'infeccionada',
 	'pé de pato': 'pé-de-pato',
@@ -1160,7 +1159,7 @@ var mappings = {
 	'inspetor-gerais': 'inspector-gerais',
 	'ultrassecreto': 'ultra-secreto',
 	'peito de morte': 'peito-de-morte',
-	'pelo': 'pêlo',
+	//'pelo': 'pêlo',
 	'atrativamente': 'atractivamente',
 	'pôr do sol': 'pôr-do-sol',
 	'cofinanciados': 'co-financiados',
@@ -3192,7 +3191,7 @@ var mappings = {
 	'julha': 'Julha',
 	'infraçães': 'infracçães',
 	'mongoloide': 'mongolóide',
-	'pela': 'péla',
+	//'pela': 'péla',
 	'transacionistas': 'transaccionistas',
 	'microbjetivas': 'microbjectivas',
 	'calamoide': 'calamóide',
@@ -4186,7 +4185,7 @@ var mappings = {
 	'eletrotropias': 'electrotropias',
 	'ultracorreçãa': 'ultracorrecçãa',
 	'eletrotérmica': 'electrotérmica',
-	'pelos': 'pêlos',
+	//'pelos': 'pêlos',
 	'frente a frentes': 'frente-a-frentes',
 	'agroflorestal': 'agro-florestal',
 	'cabeça de avelã': 'cabeça-de-avelã',
@@ -4850,7 +4849,7 @@ var mappings = {
 	'pleocroica': 'pleocróica',
 	'eletronicamente': 'electronicamente',
 	'coletas': 'colectas',
-	'pelas': 'pélas',
+	//'pelas': 'pélas',
 	'sintática': 'sintáctica',
 	'madefaçãos': 'madefacçãos',
 	'fogo de artifício': 'fogo-de-artifício',
