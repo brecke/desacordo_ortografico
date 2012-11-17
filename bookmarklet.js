@@ -1,6 +1,3 @@
-// debug
-var start = new Date().getTime();
-
 var mappings = {
 	'infecionada': 'infeccionada',
 	'pé de pato': 'pé-de-pato',
@@ -1160,7 +1157,7 @@ var mappings = {
 	'inspetor-gerais': 'inspector-gerais',
 	'ultrassecreto': 'ultra-secreto',
 	'peito de morte': 'peito-de-morte',
-	'pelo': 'pêlo',
+	//'pelo': 'pêlo',
 	'atrativamente': 'atractivamente',
 	'pôr do sol': 'pôr-do-sol',
 	'cofinanciados': 'co-financiados',
@@ -3192,7 +3189,7 @@ var mappings = {
 	'julha': 'Julha',
 	'infraçães': 'infracçães',
 	'mongoloide': 'mongolóide',
-	'pela': 'péla',
+	//'pela': 'péla',
 	'transacionistas': 'transaccionistas',
 	'microbjetivas': 'microbjectivas',
 	'calamoide': 'calamóide',
@@ -4186,7 +4183,7 @@ var mappings = {
 	'eletrotropias': 'electrotropias',
 	'ultracorreçãa': 'ultracorrecçãa',
 	'eletrotérmica': 'electrotérmica',
-	'pelos': 'pêlos',
+	//'pelos': 'pêlos',
 	'frente a frentes': 'frente-a-frentes',
 	'agroflorestal': 'agro-florestal',
 	'cabeça de avelã': 'cabeça-de-avelã',
@@ -4850,7 +4847,7 @@ var mappings = {
 	'pleocroica': 'pleocróica',
 	'eletronicamente': 'electronicamente',
 	'coletas': 'colectas',
-	'pelas': 'pélas',
+	//'pelas': 'pélas',
 	'sintática': 'sintáctica',
 	'madefaçãos': 'madefacçãos',
 	'fogo de artifício': 'fogo-de-artifício',
@@ -9026,69 +9023,68 @@ var mappings = {
 	'pseudoaticisma': 'pseudo-aticisma',
 }
 
- 
-  function isCapitalized(string) {
-      first = string[0];
-      rest  = string.slice(1);
-      return first==first.toUpperCase() && rest==rest.toLowerCase();
-  }
-  
-  function capitalize(string) {
-      return string[0].toUpperCase() + string.slice(1).toLowerCase();
-  }
+function isCapitalized(string) {
+  first = string[0];
+  rest  = string.slice(1);
+  return first==first.toUpperCase() && rest==rest.toLowerCase();
+}
 
-  function isLowerCase(string) {
-      return string == string.toLowerCase();
-  }
-  
-  function isUpperCase(string) {
-      return string == string.toUpperCase();
-  }
-  
-  // go through the DOM recursively
-  function getTextNodesIn(node, includeWhitespaceNodes) {
-      var textNodes = [], whitespace = /^\s*$/;
-  
-      function getTextNodes(node) {
+function capitalize(string) {
+  return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
 
-          if (node.nodeType == 3) {
-              if (includeWhitespaceNodes || (!whitespace.test(node.textContent))) { // nodeValue
-                textNodes.push(node);
-              }
+function isLowerCase(string) {
+  return string == string.toLowerCase();
+}
 
-          // recursively get the text nodes from other node types:
-          // TYPE 1: ELEMENT_NODE
-          // exception for <script>
-          // exception for <style>
-          // exception for <em>
-          // exception for <i>
-          // exception for <b>
-          // exception for <strong>
-          } else if (node.nodeType == 1 
-            && node.nodeName.toLowerCase() != "script" 
-            && node.nodeName.toLowerCase() != 'style'
-            && node.nodeName.toLowerCase() != 'strong'
-            && node.nodeName.toLowerCase() != 'em'
-            && node.nodeName.toLowerCase() != 'i'
-            && node.nodeName.toLowerCase() != 'b') {
+function isUpperCase(string) {
+  return string == string.toUpperCase();
+}
 
-            for (var i = 0, len = node.childNodes.length; i < len; ++i) {
-                getTextNodes(node.childNodes[i]);
-            }
+// go through the DOM recursively
+function getTextNodesIn(node, includeWhitespaceNodes) {
+  var textNodes = [], whitespace = /^\s*$/;
+
+  function getTextNodes(node) {
+
+      if (node.nodeType == 3) {
+          if (includeWhitespaceNodes || (!whitespace.test(node.textContent))) { // nodeValue
+            textNodes.push(node);
           }
+
+      // recursively get the text nodes from other node types:
+      // TYPE 1: ELEMENT_NODE
+      // exception for <script>
+      // exception for <style>
+      // exception for <em>
+      // exception for <i>
+      // exception for <b>
+      // exception for <strong>
+      } else if (node.nodeType == 1 
+        && node.nodeName.toLowerCase() != "script" 
+        && node.nodeName.toLowerCase() != 'style'
+        && node.nodeName.toLowerCase() != 'strong'
+        && node.nodeName.toLowerCase() != 'em'
+        && node.nodeName.toLowerCase() != 'i'
+        && node.nodeName.toLowerCase() != 'b') {
+
+        for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+            getTextNodes(node.childNodes[i]);
+        }
       }
-  
-      getTextNodes(node);
-      return textNodes;
   }
-  
-  // translate the document body
-  var textNodes = getTextNodesIn(document.body, false);
-  
-  for(var i = 0; i < textNodes.length; i++) {
+
+  getTextNodes(node);
+  return textNodes;
+}
+
+// translate the document body
+var textNodes = getTextNodesIn(document.body, false);
+
+for(var i = 0; i < textNodes.length; i++) {
 
     text = $.trim(textNodes[i].textContent);
-    
+
     // replace via regex
     text = text.replace(':', ' ');
     text = text.replace('...', ' ');
@@ -9104,13 +9100,13 @@ var mappings = {
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
-    
+
     for (var j = 0; j < tokens.length; j++) {
       word = tokens[j];
       replaceWord = mappings[ word.toLowerCase() ];
-       
+   
        if ( replaceWord ) {
-           
+       
            if ( isCapitalized(word) ) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, capitalize( replaceWord ));
            } else if ( isUpperCase(word) ) {
@@ -9120,5 +9116,5 @@ var mappings = {
            };
        }; 
     }
-  }
+}
 
