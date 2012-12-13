@@ -11,13 +11,6 @@ class Feminine(object):
     
     @classmethod
     def get(self, word):
-        if word.endswith("o"):
-            exceptions = {
-                "melro": "melroa", "marido": "mulher", "genro": "nora", "padrasto": "madrasta",
-                "carneiro": "ovelha", "padrinho": "madrinha", "diácono": "diaconisa",
-                "galo": "galinha", "avõ": "avó",
-            }
-            return exceptions[word] if word in exceptions else word[:-1]+"a"
         if word.endswith("ão"):
             exceptions = {
                 "barão": "baronesa", "cão": "cadela", "ladrão": "ladra", "lebrão": "lebre",
@@ -26,6 +19,13 @@ class Feminine(object):
             size    = len("ão")
             options = [word[:-size]+"â", word[:-size]+"oa", word[:-size]+"ona"]
             return exceptions[word] if word in exceptions else user_input( options )
+        if word.endswith("o"):
+            exceptions = {
+                "melro": "melroa", "marido": "mulher", "genro": "nora", "padrasto": "madrasta",
+                "carneiro": "ovelha", "padrinho": "madrinha", "diácono": "diaconisa",
+                "galo": "galinha", "avõ": "avó",
+            }
+            return exceptions[word] if word in exceptions else word[:-1]+"a"
         if word.endswith("eu"):
             exceptions = {
                 "reu": "ré", "judeu": "judia", "sandeu": "sandia"
