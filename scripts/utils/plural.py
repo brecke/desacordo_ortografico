@@ -1,32 +1,21 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from utils.settings import Settings
+from utils import user_input
 import re
 
+# http://pt.wikipedia.org/wiki/Preposi%C3%A7%C3%A3o
+PREPOSITIONS = [
+    "a", "o", "as", "às", "à", "os", "ao", "aos", "na", "nas", "no", "nos",
+    "ante", "antes", "apó", "após", "saté", "com", "contra", "de", "des", 
+    "da", "das", "do", "dos", "desde", "em", "entre", "perante", "por", 
+    "sem", "sob", "sobre", "trás", "no", "nos", "anti", "auto", #"para"
+]
 
-def user_input(options):
-    if Settings.DONT_ASK:
-        return options[0]
-    print "Don't know which one is right:"
-    print "%s (default)" %options[0]
-    for i in options[1:]:
-        print i
-    plural = raw_input("Write the right answer: ") or options[0]
-    print '-----'
-    return plural
-    
 
 class Plural(object):
     """
     http://pt.wikipedia.org/wiki/Plural
     """
-    #http://pt.wikipedia.org/wiki/Preposi%C3%A7%C3%A3o
-    prepositions = [
-        "a", "o", "as", "às", "à", "os", "ao", "aos", "na", "nas", "no", "nos",
-        "ante", "antes", "apó", "após", "saté", "com", "contra", "de", "des", 
-        "da", "das", "do", "dos", "desde", "em", "entre", "perante", "por", 
-        "sem", "sob", "sobre", "trás", "no", "nos", "anti", "auto", #"para"
-    ]
     
     @classmethod
     def get(self, word):
@@ -55,10 +44,10 @@ class Plural(object):
     def __hifen_rules(self, word):
         splited = re.split( r'-|\s', word )
         if len(splited) >= 3:
-            if splited[1] in self.prepositions:
+            if splited[1] in PREPOSITIONS:
                 return "-".join( [self.__get(splited[0])]+splited[1:] )
         elif len(splited) == 2:
-            if splited[0] in self.prepositions:
+            if splited[0] in PREPOSITIONS:
                 return "%s-%s" %( splited[0], self.__get(splited[1]) )
         return self.__get( word )
           

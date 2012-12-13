@@ -1,55 +1,63 @@
 #!/usr/bin/env python
 # encoding: utf-8
-import requests, re, simplejson, sys, codecs
-from python_utils.to_feminine import *
-from python_utils.to_plural   import *
+import requests, re, argparse
+from utils.grammar     import Grammar
+from utils.settings    import Settings
+from utils.file        import File
 
+import sys
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
-def dict_to_str(d):
-    l = []
-    for k,v in d.iteritems():
-        if k and v:
-            try:
-                element = u"\t'"+unicode(k)+"': '"+unicode(v)+"',\n"
-                l.append( element )
-            except UnicodeDecodeError:
-                print '|'
-                continue         
-    #l = [u"\t'"+unicode(k)+"': '"+unicode(v)+"',\n" for k,v in d.iteritems() if k and v]
-    return u"var mappings = {\n" + "".join(l) + u"}"
+ALPHABET = [chr(i) for i in range(97, 123)]
+
+def run():
     
-def write_to_file(dic, filename="mappings.js"):
-    js_file = codecs.open( filename, "w", "utf-8" )
-    js_file.write( dict_to_str(dic) )
-    js_file.close()
-         
-
-
-url = "http://www.portaldalinguaportuguesa.org/?action=novoacordo&act=list&letter=%s&version=pe"
-alphabet = [chr(i) for i in range(97, 123)]
-
-table_regex    = r"<tr><th>Ortografia Antiga<th>Ortografia Nova<th>Notas(.*)<p></table>"
-old_word_regex = r"<td title='forma antiga'>(.*)<td>.*<td>"
-new_word_regex = r"<td title='forma antiga'>.*<td>(.*)<td>"
-
-all_words = {}
-for char in alphabet:
-    words = {}
-    try:
-        response  = requests.get( url%char ).content.replace( '\n', '' )
-        table     = re.findall( table_regex, response )[0].split( '<tr' )
+    def get_dao( table ):
+        regex = r"<td title='forma antiga'>.*<td>(.*)<td>"
+        return [ re.findall( regex, row )[0].split(',')[0] for row in table if row ]
         
-        old_words = [ re.findall( old_word_regex, row )[0] for row in table if row ]
-        new_words = [ re.findall( new_word_regex, row )[0] for row in table if row ]
+    def get_aao( table ):
+        regex = r"<td title='forma antiga'>(.*)<td>.*<td>"
+        return [ re.findall( regex, row )[0].split(',')[0] for row in table if row ]
+    
+    def get_html( char ):
+        url = "http://www.portaldalinguaportuguesa.org/?action=novoacordo&act=list&letter=%s&version=pe"
+        return requests.get( url%char ).content.replace( '\n', '' )
+    
+    def get_words( char ):
+        regex =  r"<tr><th>Ortografia Antiga<th>Ortografia Nova<th>Notas(.*)<p></table>"
+        table = re.findall( regex, get_html(char) )[0].split( '<tr' )
+        return dict(zip( get_dao(table), get_aao(table) )) 
+
+    def get_plurals(dic):
+        plural = lambda d,a: (Grammar.DAO.get_plural(d), Grammar.AAO.get_plural(a))
+        words  = [plural(dao, aao) for dao,aao in dic.iteritems() if dao and aao]
+        return dict( words )    
+    
+    def get_feminine(dic):
+        feminine = lambda d,a: (Grammar.DAO.get_feminine(d), Grammar.AAO.get_feminine(a))
+        words    = [feminine(dao, aao) for dao,aao in dic.iteritems() if dao and aao]
+        return dict( words )
         
-        words.update( dict( zip(new_words, old_words) ) )
-        add_feminine_to_dict( words )
-        add_plurals_to_dict( words )
-        all_words.update( words )
-        
-    except IndexError:
-        continue
-       
-write_to_file( all_words ) 
+    all_words = {}
+    for char in ALPHABET:
+        try:
+            print ":: " + char.upper()
+            words = get_words(char)
+            words.update( get_feminine(words) )
+            words.update( get_plurals(words) )
+            all_words.update( words )
+        except IndexError:
+            continue
+    return all_words
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--dont-ask', dest='dont_ask', action='store_const', const=True, default=False,
+                       help='Should the script ask you when it is not sure of something or should it try to guess?')
+    Settings.DONT_ASK = parser.parse_args().dont_ask
+
+    words = run()
+    File().write( words ) 
+    

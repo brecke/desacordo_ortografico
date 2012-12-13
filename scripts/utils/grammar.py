@@ -1,19 +1,29 @@
 #!/usr/bin/env python
 # encoding: utf-8
-
-from utils.priberam import Priberam, WordNotRecognized, WordUnknown, PluralUnknown, PluralNotFound
-from utils.plural   import Plural
+from utils.priberam.exceptions import *
+from utils.priberam            import Priberam
+from utils.feminine            import Feminine
+from utils.plural              import Plural
 
 class Grammar(object):
-
-    @staticmethod
-    def get_plural(word, aao=True):
-        try:
-            return Priberam.AAO.get_plural( word ) if aao else Priberam.DAO.get_plural( word ) 
-        except (WordNotRecognized, WordUnknown, PluralUnknown, PluralNotFound) as e:
-            return Plural.get( word )
+    
+    class API(object):
         
-    @staticmethod
-    def get_feminine(word):
-        pass
+        @classmethod
+        def get_plural(self, word):
+            try:
+                return self.priberam_plural( word )
+            except (WordNotRecognized, WordUnknown, PluralUnknown, PluralNotFound) as e:
+                return Plural.get( word )
+
+        @classmethod
+        def get_feminine(self, word):
+            # don't asks priberam. Caos!
+            return Feminine.get( word )
+    
+    class AAO(API):
+        priberam_plural = Priberam.AAO.get_plural
+        
+    class DAO(API):
+        priberam_plural = Priberam.DAO.get_plural
         
