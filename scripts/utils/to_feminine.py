@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from python_utils.__init__ import return_tuple
+from utils.__init__ import return_tuple
 
 @return_tuple
 def to_feminine(word):
@@ -93,7 +93,7 @@ def to_feminine(word):
     if word=="zagal":       return "zagala"
     return word
     
-def add_feminine_to_dict(dic):
+def add_feminines(dic):
     l = []
     for k,v in dic.iteritems():
         if not k or not v:
