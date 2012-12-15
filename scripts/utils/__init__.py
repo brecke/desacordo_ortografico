@@ -9,3 +9,14 @@ def user_input(options):
     for i in options[1:]:
         print i
     return raw_input("Write the right answer: ") or options[0]
+
+class verbosity(object):
+    def __init__(self, text):
+        self.text = text
+        
+    def __call__(self, f):
+        def wrapper(*args, **kwargs):
+            if Settings.VERBOSE:
+                print '> '+self.text
+            return f(*args, **kwargs)
+        return wrapper
