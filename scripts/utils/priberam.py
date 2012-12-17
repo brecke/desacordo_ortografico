@@ -15,7 +15,7 @@ class Priberam(object):
         def get(self, url, whitespaces=False):
             clean = lambda x: " ".join( x.replace( '\n', '' ).split() )
             if Settings.LAZY:
-                time.sleep(1)
+                time.sleep(0.5)
             response = requests.get( url, cookies=self.cookies ).content
             return response if whitespaces else clean( response )
         

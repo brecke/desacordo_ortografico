@@ -22,19 +22,19 @@ class Words(dict):
         words    = zip( find_words(DAO_REGEX, table), find_words(AAO_REGEX, table) )
         return self( dict(words) )
 
-    @verbosity('adding plural form')
+    @verbosity('> adding plural form')
     def add_plurals(self):
         for dao,aao in self.items():
             if dao and aao:
                 self[ Grammar.DAO.get_plural(dao) ] = Grammar.AAO.get_plural(aao)
 
-    @verbosity('adding feminine form')
+    @verbosity('> adding feminine form')
     def add_feminines(self):
         for dao,aao in self.items():
             if dao and aao:
                 self[ Grammar.DAO.get_feminine(dao) ] = Grammar.AAO.get_feminine(aao)
 
-    @verbosity('adding verb conjugations')
+    @verbosity('> adding verb conjugations')
     def add_conjugations(self):
         def conjugations(d,a):
             dao_ = Grammar.DAO.get_conjugations(d)
@@ -43,7 +43,7 @@ class Words(dict):
                 if len(dao_)==len(aao_):
                     return zip(dao_, aao_)
                 if Settings.VERBOSE:
-                    print "\nWARNING: could not conjugate '%s' and '%s' properly." %(d,a)
+                    print "WARNING: could not conjugate '%s' and '%s' properly." %(d,a)
             if len(dao_)!=len(aao_):
                 #TODO: go to black list
                 pass

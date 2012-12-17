@@ -15,7 +15,7 @@ def run():
     for char in ALPHABET:
         try:
             if Settings.VERBOSE:
-                print ">> Getting words starting with '%s'." %char.upper()
+                print ">> Getting words starting with '%s'" %char.upper()
             
             words = Words.get( char )
             words.add_conjugations()

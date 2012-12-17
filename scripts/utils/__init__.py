@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 from utils.settings import Settings
+import sys
 
 def user_input(options):
     if Settings.DONT_ASK:
@@ -11,12 +12,16 @@ def user_input(options):
     return raw_input("Write the right answer: ") or options[0]
 
 class verbosity(object):
-    def __init__(self, text):
+    def __init__(self, text=None):
         self.text = text
         
     def __call__(self, f):
         def wrapper(*args, **kwargs):
             if Settings.VERBOSE:
-                print '> '+self.text
+                if self.text == None:
+                    print '.',
+                    sys.stdout.flush()
+                else:
+                    print self.text
             return f(*args, **kwargs)
         return wrapper

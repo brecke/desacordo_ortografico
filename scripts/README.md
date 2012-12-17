@@ -22,5 +22,5 @@
 
 - **--priberam**: ask first to *priberam.pt* before trying to guess (defaults to True)
 - **--dont-ask**: ask the user for the right plural/feminine form in case of doubt (defaults to False)
-- **--verbose**: keep the user informed of what is happening (defaults to False)
-- **--lazy**: add a 1second interval between request to *priberam.pt* (defaults to False)
+- **--verbose**:  keep the user informed of what is happening (defaults to False)
+- **--lazy**:     add a 1second interval between request to *priberam.pt* (defaults to False)
