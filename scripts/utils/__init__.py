@@ -22,6 +22,6 @@ class verbosity(object):
                     print '.',
                     sys.stdout.flush()
                 else:
-                    print self.text
+                    print '\n%s' %self.text
             return f(*args, **kwargs)
         return wrapper

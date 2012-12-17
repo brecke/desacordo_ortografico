@@ -43,7 +43,7 @@ class Words(dict):
                 if len(dao_)==len(aao_):
                     return zip(dao_, aao_)
                 if Settings.VERBOSE:
-                    print "WARNING: could not conjugate '%s' and '%s' properly." %(d,a)
+                    print "\nWARNING: could not conjugate '%s' and '%s' properly." %(d,a)
             if len(dao_)!=len(aao_):
                 #TODO: go to black list
                 pass
