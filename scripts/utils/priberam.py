@@ -49,15 +49,15 @@ class Priberam(object):
 
     class AAO(API):
         cookies = {
-            'DLPO_UsaAcordo': False,
-            'aAO': 0,
-            'varpt': 0,
+            'DLPO_UsaAcordo': 'False',
+            'aAO': '0',
+            'varpt': '0',
         }
         
     class DAO(API):
         cookies = {
-            'DLPO_UsaAcordo': True,
-            'aAO': 1,
-            'varpt': 0,
+            'DLPO_UsaAcordo': 'True',
+            'aAO': '1',
+            'varpt': '0',
         }
 
