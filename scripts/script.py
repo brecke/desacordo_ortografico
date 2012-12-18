@@ -10,19 +10,13 @@ sys.setdefaultencoding( "utf-8" )
 
 ALPHABET = [chr(i) for i in range(97, 123)]
 
-def run():
+def get_words():
     all_words = {}
-    for char in ALPHABET:
+    for char in ALPHABET[17:18]:
         try:
             if Settings.VERBOSE:
                 print "\n>> Getting words starting with '%s'" %char.upper()
-            
-            words = Words.get( char )
-            words.add_conjugations()
-            words.add_feminines()
-            words.add_plurals()
-            words.remove_redundancy()
-            
+            words = Words.get( char ).with_variants()
             all_words.update( words )
         except IndexError:
             continue
@@ -30,6 +24,4 @@ def run():
 
 if __name__ == '__main__':
     Settings.check()
-    words = run()
-    File.write( words ) 
-    
+    File.write( get_words() )     

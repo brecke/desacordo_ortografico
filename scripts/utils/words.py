@@ -12,6 +12,7 @@ class Words(dict):
      
     def __init__(self, dic):
         self.update( dic )
+        self.original = dic.items()
 
     @classmethod
     def get(self, char):
@@ -21,6 +22,16 @@ class Words(dict):
         table    = find( WORDS_REGEX, response, '<tr' )
         words    = zip( find_words(DAO_REGEX, table), find_words(AAO_REGEX, table) )
         return self( dict(words) )
+
+    def add_variants(self):
+        self.add_feminines()
+        self.add_plurals()
+        self.add_conjugations()
+        self.remove_redundancy()
+        
+    def with_variants(self):
+        self.add_variants()
+        return self
 
     @verbosity('> adding plural form')
     def add_plurals(self):
@@ -49,7 +60,7 @@ class Words(dict):
                 pass
             return []
 
-        words = [conjugations(dao, aao) for dao,aao in self.iteritems() if dao and aao]
+        words = [conjugations(dao, aao) for dao,aao in self.original if dao and aao]
         self.update( dict( reduce(lambda a,b: a+b, words) ) )                
 
     @verbosity('removing redundancy')
