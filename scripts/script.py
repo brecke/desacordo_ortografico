@@ -12,7 +12,7 @@ ALPHABET = [chr(i) for i in range(97, 123)]
 
 def get_words():
     all_words = {}
-    for char in ALPHABET[17:18]:
+    for char in ALPHABET:
         try:
             if Settings.VERBOSE:
                 print "\n>> Getting words starting with '%s'" %char.upper()
