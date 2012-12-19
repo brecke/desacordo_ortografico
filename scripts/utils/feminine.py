@@ -17,7 +17,7 @@ class Feminine(object):
                 "perdigão": "perdiz", "tecelão": "tecedeira", "zângão": "abelha",
             }
             size    = len("ão")
-            options = [word[:-size]+"â", word[:-size]+"oa", word[:-size]+"ona"]
+            options = [word[:-size]+"ã", word[:-size]+"oa", word[:-size]+"ona"]
             return exceptions[word] if word in exceptions else user_input( options )
         if word.endswith("o"):
             exceptions = {

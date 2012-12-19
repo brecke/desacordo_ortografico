@@ -30,3 +30,7 @@ class VerbNotFound(Exception):
         self.word=word
     def __str__(self):
         return "Verb '%s' not found in Priberam. It may not be a verb" %self.word
+
+class NoInputGiven(Exception):
+    def __str__(self):
+        return "No input given"

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import requests, re, time
-from utils.grammar  import Grammar
-from utils.settings import Settings
-from utils.regexes  import DAO_REGEX, AAO_REGEX, WORDS_REGEX
-from utils          import verbosity
+from utils.grammar    import Grammar
+from utils.settings   import Settings
+from utils.exceptions import NoInputGiven
+from utils.regexes    import DAO_REGEX, AAO_REGEX, WORDS_REGEX
+from utils            import verbosity
 
 
 class Words(dict):
@@ -36,14 +37,20 @@ class Words(dict):
     @verbosity('> adding plural form')
     def add_plurals(self):
         for dao,aao in self.items():
-            if dao and aao:
-                self[ Grammar.DAO.get_plural(dao) ] = Grammar.AAO.get_plural(aao)
+            try:
+                if dao and aao:
+                    self[ Grammar.DAO.get_plural(dao) ] = Grammar.AAO.get_plural(aao)
+            except NoInputGiven:
+                continue
 
     @verbosity('> adding feminine form')
     def add_feminines(self):
         for dao,aao in self.items():
-            if dao and aao:
-                self[ Grammar.DAO.get_feminine(dao) ] = Grammar.AAO.get_feminine(aao)
+            try:
+                if dao and aao:
+                    self[ Grammar.DAO.get_feminine(dao) ] = Grammar.AAO.get_feminine(aao)
+            except NoInputGiven:
+                continue
 
     @verbosity('> adding verb conjugations')
     def add_conjugations(self):
@@ -63,7 +70,7 @@ class Words(dict):
         words = [conjugations(dao, aao) for dao,aao in self.original if dao and aao]
         self.update( dict( reduce(lambda a,b: a+b, words) ) )                
 
-    @verbosity('removing redundancy')
+    @verbosity('> removing redundancy')
     def remove_redundancy(self):
         for dao,aao in self.items():
             if dao==aao:
