@@ -2,35 +2,34 @@
 # encoding: utf-8
 
 class WordNotRecognized(Exception):
-    def __init__(self, word):
-        self.word=word
-    def __str__(self):
-        return "Definition of the word '%s' unknown to Priberam." %self.word
+    pass
+
 
 class WordUnknown(Exception):
-    def __init__(self, word):
-        self.word=word
-    def __str__(self):
-        return "Word '%s' unknown to Priberam." %self.word
+    pass
+
 
 class PluralUnknown(Exception):
-    def __init__(self, word):
-        self.word=word
-    def __str__(self):
-        return "Plural form of word '%s' unknown to Priberam." %self.word
+    pass
+
         
 class PluralNotFound(Exception):
-    def __init__(self, word):
-        self.word=word
-    def __str__(self):
-        return "Plural form of word '%s' not parsed from Priberam." %self.word
+    pass
+
 
 class VerbNotFound(Exception):
-    def __init__(self, word):
-        self.word=word
-    def __str__(self):
-        return "Verb '%s' not found in Priberam. It may not be a verb" %self.word
+    pass
+
 
 class NoInputGiven(Exception):
-    def __str__(self):
-        return "No input given"
+    pass
+
+
+class MultipleOptions(Exception):
+    def __init__(self, *args):
+        self.options  = args
+        
+    def ask_priberam(self, priberam):
+        for option in self.options:
+            if priberam.word_exists( option ):
+                return option

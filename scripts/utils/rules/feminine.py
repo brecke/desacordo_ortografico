@@ -1,24 +1,27 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from utils import user_input
+from utils            import PREPOSITIONS
+from utils.rules      import Rules
+from utils.exceptions import MultipleOptions
 import re
 
 
-class Feminine(object):
+class Feminine(Rules):
     """
     http://www.flip.pt/FLiP-On-line/Gramatica/Morfologia-Partes-do-discurso/Genero/Feminino-dos-substantivos-e-dos-adjectivos.aspx
     """
     
     @classmethod
-    def get(self, word):
+    def __get(self, word):
         if word.endswith("ão"):
+            size       = len("ão")
             exceptions = {
                 "barão": "baronesa", "cão": "cadela", "ladrão": "ladra", "lebrão": "lebre",
                 "perdigão": "perdiz", "tecelão": "tecedeira", "zângão": "abelha",
             }
-            size    = len("ão")
-            options = [word[:-size]+"ã", word[:-size]+"oa", word[:-size]+"ona"]
-            return exceptions[word] if word in exceptions else user_input( options )
+            if word in exceptions:
+                return exceptions[word]
+            raise MultipleOptions( word[:-size]+"ã", word[:-size]+"oa", word[:-size]+"ona" )
         if word.endswith("o"):
             exceptions = {
                 "melro": "melroa", "marido": "mulher", "genro": "nora", "padrasto": "madrasta",

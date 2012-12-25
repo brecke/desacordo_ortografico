@@ -4,9 +4,19 @@ from utils.settings   import Settings
 from utils.exceptions import NoInputGiven
 import sys
 
+PREPOSITIONS = [
+    "a", "o", "as", "às", "à", "os", "ao", "aos", "na", "nas", "no", "nos",
+    "ante", "antes", "apó", "após", "saté", "com", "contra", "de", "des", 
+    "da", "das", "do", "dos", "desde", "em", "entre", "perante", "por", 
+    "sem", "sob", "sobre", "trás", "no", "nos", "anti", "auto", #"para"
+]
+
+MAIN_PREPOSITIONS = ["auto", "anti"]
+
+
 def user_input(options):
     if Settings.DONT_ASK:
-        return options[0]
+        raise NoInputGiven()
     print "\nDon't know which one is right: "
     print "\n".join( ['\t%s - %s' %(i+1, options[i]) for i in range(len(options))])
     print '\t0 - None of the above'
