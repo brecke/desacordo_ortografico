@@ -15,7 +15,6 @@ class Grammar(object):
         @classmethod
         @verbosity()
         def get_plural(self, word):
-            print word 
             try:
                 if Settings.NO_PRIBERAM:
                     return Plural.get( word )

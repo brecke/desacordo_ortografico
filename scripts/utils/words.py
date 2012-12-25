@@ -27,9 +27,9 @@ class Words(dict):
 
 
     def add_variants(self):
-        #self.add_feminines()
+        self.add_feminines()
         self.add_plurals()
-        #self.add_conjugations()
+        self.add_conjugations()
         self.remove_redundancy()
 
         
