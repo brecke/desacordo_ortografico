@@ -9060,8 +9060,8 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
       // exception for <i>
       // exception for <b>
       // exception for <strong>
-      } else if (node.nodeType == 1 
-        && node.nodeName.toLowerCase() != "script" 
+      } else if (node.nodeType == 1
+        && node.nodeName.toLowerCase() != "script"
         && node.nodeName.toLowerCase() != 'style'
         && node.nodeName.toLowerCase() != 'strong'
         && node.nodeName.toLowerCase() != 'em'
@@ -9104,9 +9104,9 @@ for(var i = 0; i < textNodes.length; i++) {
     for (var j = 0; j < tokens.length; j++) {
       word = tokens[j];
       replaceWord = mappings[ word.toLowerCase() ];
-   
+
        if ( replaceWord ) {
-       
+
            if ( isCapitalized(word) ) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, capitalize( replaceWord ));
            } else if ( isUpperCase(word) ) {
@@ -9114,7 +9114,9 @@ for(var i = 0; i < textNodes.length; i++) {
            } else {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toLowerCase());
            };
-       }; 
+       };
     }
 }
 
+// overlay effect stop
+$('.overlay').remove();

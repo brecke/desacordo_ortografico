@@ -3,7 +3,7 @@ function isCapitalized(string) {
     rest  = string.slice(1);
     return first==first.toUpperCase() && rest==rest.toLowerCase();
 }
-  
+
 function capitalize(string) {
     return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -35,8 +35,8 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
         // exception for <i>
         // exception for <b>
         // exception for <strong>
-        } else if (node.nodeType == 1 
-          && node.nodeName.toLowerCase() != "script" 
+        } else if (node.nodeType == 1
+          && node.nodeName.toLowerCase() != "script"
           && node.nodeName.toLowerCase() != 'style'
           && node.nodeName.toLowerCase() != 'strong'
           && node.nodeName.toLowerCase() != 'em'
@@ -53,14 +53,14 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
     return textNodes;
 }
 
-function translate() {
-  
+function translate(dimOverlay) {
+
   var textNodes = getTextNodesIn(document.body, false);
 
   for(var i = 0; i < textNodes.length; i++) {
 
     text = $.trim(textNodes[i].textContent);
-    
+
     // replace via regex
     text = text.replace(':', ' ');
     text = text.replace('...', ' ');
@@ -76,26 +76,41 @@ function translate() {
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
-    
+
     for (var j = 0; j < tokens.length; j++) {
       word = tokens[j];
       replaceWord = mappings[ word.toLowerCase() ];
-       
-       if ( replaceWord ) {
-           
-           if ( isCapitalized(word) ) {
+
+       if (replaceWord) {
+           if (isCapitalized(word)) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, capitalize( replaceWord ));
-           } else if ( isUpperCase(word) ) {
+           } else if (isUpperCase(word)) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toUpperCase());
            } else {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toLowerCase());
            };
-       }; 
+       };
     }
   }
+    // callback for removing the overlay
+    dimOverlay();
 }
 
-chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    translate();
-  });
+// clicking on the chrome extension icon
+chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
+
+    // start translation
+    if (request.method == "start") {
+        injectOverlayElement();
+
+        // ask the background script for the selected tab language
+        chrome.extension.sendMessage( { method: "getLanguage" }, function (response) {
+            if (response) {
+                language = response.data;
+                if(language == "pt-PT") {
+                    translate( reverseOverlay );
+                }
+            }
+        });
+    };
+});
