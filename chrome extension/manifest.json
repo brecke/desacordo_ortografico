@@ -4,15 +4,12 @@
   "version": "0.0.1",
   "description": "Porque a língua é do povo",
 
-  // Needed to retrieve options from content script
   "background": {
       "scripts": [ "jquery.min.js", "mappings.js", "overlay.js", "translate.js", "background.js" ]
     },
 
-  // Gives access to extension options from Extensions Manager
   "options_page": "options.html",
 
-  // This is how you load Browser Action. Nearly equal to Page one.
   "browser_action": {
       "default_icon": "images/logo.png"
   },
@@ -22,7 +19,6 @@
     "http://*/*"
   ],
 
-  // javascripts
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
