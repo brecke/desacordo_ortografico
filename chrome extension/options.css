@@ -1,0 +1,29 @@
+/* style and layout for the page */
+#content {
+    text-align: center;
+}
+
+#content img {
+    margin-top: 20px;
+    max-width: 300px;
+    float: center;
+}
+
+#bottom p {
+    margin-top: 100px;
+    color: rgb(169, 169, 169);
+    font-size: 11px;
+    text-align: center;
+}
+
+#top h1 {
+    margin-top: 50px;
+    font-family: 'Crafty Girls', cursive;
+    text-align: center;
+    font-weight: bold;
+}
+
+fieldset {
+    border: none;
+    margin: 0 auto;
+}
