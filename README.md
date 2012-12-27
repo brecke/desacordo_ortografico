@@ -10,15 +10,11 @@ Este repositório tem 3 pastas:
 
 Não pretendo evangelizar ninguém, cada um tem os seus motivos. Se quiseres usar, usa. Se não quiseres, temos pena.
 
-## TODO ##
-
-Cada pasta tem um ficheiro `TODO.md` com ideias de ajustes e correcções a fazer.
-
 ## Posso contribuir? ##
 
 Claro. Há duas formas de o fazer:
 
 1. Identificar erros e/ou situações em que a extensão não funciona correctamente. Para isso basta abrir um *issue* e descrever o cenário.
-2. Fazer *fork* e *pull request* com melhorias ao código.
+2. Fazer *fork* e *pull request* com melhorias ao código. Cada pasta tem um ficheiro `TODO.md` com ideias de ajustes e correcções a fazer.
 
 
