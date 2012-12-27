@@ -5,7 +5,7 @@ from utils.grammar    import Grammar
 from utils.settings   import Settings
 from utils.exceptions import NoInputGiven
 from utils.regexes    import DAO_REGEX, AAO_REGEX, WORDS_REGEX
-from utils            import verbosity
+from utils            import verbosity, items_to_dict
 
 
 class Words(dict):
@@ -14,7 +14,7 @@ class Words(dict):
     def __init__(self, dic):
         self.update( dic )
         self.original = dic.items()
-
+        
 
     @classmethod
     def get(self, char):
@@ -23,7 +23,7 @@ class Words(dict):
         response = requests.get( self.url%char ).content.replace( '\n', '' )    
         table    = find( WORDS_REGEX, response, '<tr' )
         words    = zip( find_words(DAO_REGEX, table), find_words(AAO_REGEX, table) )
-        return self( dict(words) )
+        return self( items_to_dict(words) )
 
 
     def add_variants(self):

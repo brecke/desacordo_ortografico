@@ -2,7 +2,7 @@
 # encoding: utf-8
 from utils.settings   import Settings
 from utils.exceptions import NoInputGiven
-import sys
+import sys, re
 
 PREPOSITIONS = [
     "a", "o", "as", "às", "à", "os", "ao", "aos", "na", "nas", "no", "nos",
@@ -12,6 +12,22 @@ PREPOSITIONS = [
 ]
 
 MAIN_PREPOSITIONS = ["auto", "anti"]
+
+
+def items_to_dict(items):
+    words = {}
+    for key,value in items:
+        if not key:
+            subwords = re.findall(r'(.*)[pc]([^aeiou].*)', value)
+            if subwords and len(subwords[0])==2:
+                words[ ''.join(subwords[0]) ] = value
+            elif '-' in value:
+                words[ value.replace('-', ' ') ] = value
+            else:
+                words[ key ] = value
+        else:
+            words[ key ] = value
+    return words
 
 
 def user_input(options):
