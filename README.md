@@ -6,7 +6,7 @@ Este repositório tem 3 pastas:
 * `bookmarklet` tem o mesmo código em formato de *bookmarklet*, para ser usado noutros *browsers*
 * `scripts` inclui o código python usado para criar o ficheiro `mappings.js`, que tem os mapeamentos do acordo de 1990 para o de 1945.
 
-## Porquê ## 
+## Porquê ##
 
 Não pretendo evangelizar ninguém, cada um tem os seus motivos. Se quiseres usar, usa. Se não quiseres, temos pena.
 
