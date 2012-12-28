@@ -53,7 +53,9 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
     return textNodes;
 }
 
-function translate(dimOverlay) {
+function translate(createOverlay, removeOverlay) {
+
+  createOverlay();
 
   var textNodes = getTextNodesIn(document.body, false);
 
@@ -93,7 +95,7 @@ function translate(dimOverlay) {
     }
   }
     // callback for removing the overlay
-    dimOverlay();
+    removeOverlay();
 }
 
 // clicking on the chrome extension icon
@@ -101,14 +103,12 @@ chrome.extension.onMessage.addListener( function(request, sender, sendResponse) 
 
     // start translation
     if (request.method == "start") {
-        injectOverlayElement();
-
         // ask the background script for the selected tab language
         chrome.extension.sendMessage( { method: "getLanguage" }, function (response) {
             if (response) {
                 language = response.data;
-                if(language == "pt-PT") {
-                    translate( reverseOverlay );
+                if(language == "pt-PT" || language == "pt") {
+                    translate (injectOverlayElement, reverseOverlay);
                 }
             }
         });
