@@ -2,7 +2,7 @@
   "name": "Desacordo ortográfico",
   "manifest_version": 2,
   "version": "0.0.1",
-  "description": "Porque a língua é do povo",
+  "description": "Em bom Português.",
 
   "background": {
       "scripts": [ "jquery.min.js", "mappings.js", "overlay.js", "translate.js", "background.js" ]
