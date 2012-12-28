@@ -1,3 +1,5 @@
+![Ah e tal agora escreve-se assim...](https://raw.github.com/brecke/desacordo_ortografico/master/images/fuck-that-bitch-yao-ming.png)
+
 # Desacordo Ortográfico #
 
 Este repositório tem 3 pastas:
