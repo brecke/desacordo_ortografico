@@ -14244,5 +14244,5 @@ var mappings = {
 	'conjeturou': 'conjecturou',
 	'corregentes': 'co-regentes',
 	'infraestruturásseis': 'infra-estruturásseis',
-    'Egito': 'Egipto',
+	'Egito': 'Egipto',
 }
