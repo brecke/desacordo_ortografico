@@ -38,8 +38,8 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
         } else if (node.nodeType == 1
           && node.nodeName.toLowerCase() != "script"
           && node.nodeName.toLowerCase() != 'style'
-          && node.nodeName.toLowerCase() != 'strong'
-          && node.nodeName.toLowerCase() != 'em'
+          // && node.nodeName.toLowerCase() != 'strong'
+          // && node.nodeName.toLowerCase() != 'em'
           && node.nodeName.toLowerCase() != 'i'
           && node.nodeName.toLowerCase() != 'b') {
 
