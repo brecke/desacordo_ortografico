@@ -14286,8 +14286,8 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
       } else if (node.nodeType == 1
         && node.nodeName.toLowerCase() != "script"
         && node.nodeName.toLowerCase() != 'style'
-        && node.nodeName.toLowerCase() != 'strong'
-        && node.nodeName.toLowerCase() != 'em'
+        // && node.nodeName.toLowerCase() != 'strong'
+        // && node.nodeName.toLowerCase() != 'em'
         && node.nodeName.toLowerCase() != 'i'
         && node.nodeName.toLowerCase() != 'b') {
 
@@ -14316,10 +14316,17 @@ for(var i = 0; i < textNodes.length; i++) {
     // text = text.replace('\'', '');
     text = text.replace('_', ' ');
     text = text.replace('@', ' ');
-    text = text.replace('"', ' ');
+    
+    text = text.replace('”', ' ');
+    text = text.replace('“', ' ');
+    text = text.replace('‘', ' ');
+    text = text.replace('’', ' ');
+    
     text = text.replace(';', ' ');
     text = text.replace('(', ' ');
     text = text.replace(')', ' ');
+    text = text.replace('«', ' ');
+    text = text.replace('»', ' ');
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
