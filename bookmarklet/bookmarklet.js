@@ -14289,7 +14289,8 @@ function getTextNodesIn(node, includeWhitespaceNodes) {
         // && node.nodeName.toLowerCase() != 'strong'
         // && node.nodeName.toLowerCase() != 'em'
         && node.nodeName.toLowerCase() != 'i'
-        && node.nodeName.toLowerCase() != 'b') {
+        // && node.nodeName.toLowerCase() != 'b'
+        ) {
 
         for (var i = 0, len = node.childNodes.length; i < len; ++i) {
             getTextNodes(node.childNodes[i]);
@@ -14316,12 +14317,12 @@ for(var i = 0; i < textNodes.length; i++) {
     // text = text.replace('\'', '');
     text = text.replace('_', ' ');
     text = text.replace('@', ' ');
-    
+
     text = text.replace('”', ' ');
     text = text.replace('“', ' ');
     text = text.replace('‘', ' ');
     text = text.replace('’', ' ');
-    
+
     text = text.replace(';', ' ');
     text = text.replace('(', ' ');
     text = text.replace(')', ' ');
