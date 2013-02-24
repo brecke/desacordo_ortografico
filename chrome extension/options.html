@@ -1,18 +1,14 @@
+
 <!DOCTYPE html>
-
-  <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-  <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-  <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-  <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-  <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
     <title>Extension Options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Included CSS Files (Compressed) -->
-    <link rel="stylesheet" type="text/css" href="styles/foundation.min.css">
+    <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="styles/options.css">
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Crafty+Girls'>
     <link rel='stylesheet' type='text/css' href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
@@ -22,46 +18,106 @@
     <script src="modernizr.foundation.js"></script>
     <script src="jquery.min.js"></script>
     <script src="bootstrapSwitch.js"></script>
+
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
   <body>
-    <div class="row">
-      <div class="eight columns centered">
 
-        <!-- topbar title -->
-        <div id="top">
-          <h1>Desacordo Ortográfico</h1>
-        </div>
-        <!-- end of topbar title -->
+    <div class="container-narrow">
 
-        <!-- content -->
-        <div id="content">
-          <!-- ALL THE THINGS!!! -->
-          <img src="images/allthethings.png">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="https://chrome.google.com/webstore/detail/desacordo-ortogr%C3%A1fico/bgimoiinoakcghlnknjaiadgafgcdiim">Chrome</a></li>
+          <li><a name="yaya" href="javascript:(function(){
+    document.body.appendChild(document.createElement('script')).src='http://code.jquery.com/jquery-1.8.3.min.js';var overlay=document.createElement('div');overlay.setAttribute('class','overlay');document.body.appendChild(overlay);$('.overlay').css({'opacity':'0.6','background':'#000','width':'100%','height':'100%','z-index':'10','top':'0','left':'0','position':'fixed'});document.body.appendChild(document.createElement('script')).src='https://raw.github.com/brecke/desacordo_ortografico/master/bookmarklet/bookmarklet.js';
+    })();" id="pinButton" title="Drag me to the bookmarks bar">
+    Bookmarklet
+</a></li>
+          <li><a href="https://twitter.com/Desacordo1990">Twitter</a></li>
+          <li><a href="http://www.miguellaginha.com/desacordo_ortografico/">Código</a></li>
+        </ul>
+        <h3 class="muted">Desacordo Ortográfico</h3>
+      </div>
 
-          <!-- the fieldset -->
+      <hr>
+
+      <div class="jumbotron">
+        <img src="images/allthethings.png">
+
+        <!-- the fieldset -->
           <fieldset>
             Tradução automática:
             <div class="switch" id="mySwitch" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
               <input type="checkbox">
             </div>
           </fieldset>
-          <!-- end of fieldset -->
-        </div>
-        <!-- end of content -->
-
-        <!-- bottom -->
-        <div id="bottom">
-          <p>
-            Desacordo Ortográfico ©2012 |
-            <a href="http://blog.diogolaginha.com">Diogo Laginha</a> &
-            <a href="http://blog.miguellaginha.com">Miguel Laginha</a> |
-            Todo o código disponível no <a href="https://github.com/brecke/desacordo_ortografico">Github</a>
-          </p>
-        </div>
-        <!-- end of bottom -->
       </div>
-    </div>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; Desacordo Ortográfico 2012-2013</p>
+        <p>
+          <a href="http://blog.diogolaginha.com">Diogo Laginha</a> &
+            <a href="http://blog.miguellaginha.com">Miguel Laginha</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script src="options.js"></script>
   </body>
 </html>
