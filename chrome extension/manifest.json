@@ -1,7 +1,7 @@
 {
   "name": "Desacordo ortográfico",
   "manifest_version": 2,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Em bom Português.",
 
   "background": {
