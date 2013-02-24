@@ -1,14 +1,14 @@
+// set the checkbox according to localstorage current value
 $(document).ready(function() {
-
-	jQuery(function($) {
-    	$('#auto').prop('checked', function() {
-    		var autoSetting = localStorage["auto"];
-            return autoSetting == "true";
-    	});
-	});
+    $('#mySwitch').bootstrapSwitch('setState', function() {
+        var autoSetting = localStorage["auto"];
+        return autoSetting == "true";
+    });
 });
 
-$("#save_button").click(function() {
- 	var autoSetting = $('#auto').is(':checked');
- 	localStorage["auto"] = autoSetting;
+// handle checkbox event
+$('#mySwitch').on('switch-change', function (e, data) {
+    var $el = $(data.el);
+    var value = data.value;
+    localStorage["auto"] = value;
 });
