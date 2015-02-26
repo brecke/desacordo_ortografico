@@ -1,4 +1,7 @@
 var mappings = {
+	'egito': 'egipto',
+	'setor': 'sector',
+	'setores': 'sectores',
 	'infecionada': 'infeccionada',
 	'desafetámos': 'desafectámos',
 	'detetava': 'detectava',
