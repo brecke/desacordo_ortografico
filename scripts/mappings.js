@@ -1,4 +1,8 @@
 var mappings = {
+	'faturada': 'facturada',
+	'faturadas': 'facturadas',
+	'faturado': 'facturado',
+	'faturados': 'facturados',
 	'egito': 'egipto',
 	'setor': 'sector',
 	'setores': 'sectores',
