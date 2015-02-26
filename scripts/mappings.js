@@ -8758,7 +8758,6 @@ var mappings = {
 	'insurrecionásseis': 'insurreccionásseis',
 	'autossuspenderem': 'auto-suspenderem',
 	'fotoeletrão': 'fotoelectrão',
-	'trata': 'tracta',
 	'coarrendadoras': 'co-arrendadoras',
 	'contrasselámos': 'contra-selámos',
 	'pão por Deus': 'pão-por-Deus',
