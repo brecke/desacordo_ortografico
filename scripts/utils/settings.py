@@ -5,7 +5,6 @@ import argparse
 class Settings(object):
     DONT_ASK    = False
     VERBOSE     = False
-    LAZY        = False
     NO_PRIBERAM = False
     
     @classmethod
@@ -15,14 +14,11 @@ class Settings(object):
                             help='do not ask the user for the right plural/feminine form in case of doubt (defaults to False)')
         parser.add_argument('--verbose',  dest='verbose',  action='store_const', const=True,  default=False,
                             help='keep the user informed of what is happening (defaults to False)')
-        parser.add_argument('--lazy',     dest='lazy',     action='store_const', const=True,  default=False,
-                            help='add a one second interval between request to *priberam.pt* (defaults to False)')
         parser.add_argument('--no-priberam', dest='no_priberam', action='store_const', const=True, default=False,
                             help='try to guess before asking *priberam.pt* (defaults to False)')
         
         args = parser.parse_args()
         self.DONT_ASK    = args.dont_ask
         self.VERBOSE     = args.verbose
-        self.LAZY        = args.lazy
         self.NO_PRIBERAM = args.no_priberam
     
