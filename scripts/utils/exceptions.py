@@ -3,19 +3,11 @@
 from .settings import Settings
 
 
-class WordNotRecognized(Exception):
+class AlreadyFeminine(Exception):
     pass
+    
 
-
-class WordUnknown(Exception):
-    pass
-
-
-class PluralUnknown(Exception):
-    pass
-
-        
-class PluralNotFound(Exception):
+class NotVerb(Exception):
     pass
 
 
@@ -39,5 +31,6 @@ class MultipleOptions(Exception):
                 return self.parent_options[i]
             if priberam.word_exists( self.parent_options[i] ):
                 return self.parent_options[i]
-        if Settings.VERBOSE and Settings.DONT_ASK: 
-            print "\tCouldn't decide which one is correct:", ', '.join(self.parent_options)
+        if Settings.VERBOSE: 
+            print "\tWARNING: correct form unkown (%s)" %', '.join(self.parent_options)
+        raise WordFormUnknown

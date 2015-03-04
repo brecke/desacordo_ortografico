@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from utils.exceptions import *
-from utils.consts     import PREPOSITIONS, PREFIXOS
-from utils.settings   import Settings
-from utils.consts     import PLURAL_REGEXES
+from utils.exceptions import VerbNotFound
 from utils.words.word import Word
-from .base import HTTP
+from utils.http.base  import HTTP
 from lxml import html
-import re
 
 
 class Priberam(object):
@@ -16,7 +12,7 @@ class Priberam(object):
         
         @classmethod
         def word_exists(cls, word):
-            return Word.get(word, cls).exists()
+            return Word.get(word, cls).exists
         
         @classmethod
         def get_word_page(cls, word):
@@ -27,18 +23,7 @@ class Priberam(object):
         def get_verb_page(cls, verb):
             url = "http://www.priberam.pt/dlpo/Conjugar/"
             return cls.get( url+verb, cookies=cls.cookies )
-        
-        @classmethod
-        def get_plural(cls, word):
-            content = cls.get_word_page( word )
-            if "Plural:" not in content:
-                raise PluralUnknown()
-            for regex in PLURAL_REGEXES:
-                result = re.findall( regex, content )
-                if result:
-                    return result[0].split('.')[0]
-            raise PluralNotFound()
-                    
+
         @classmethod
         def get_conjugations(cls, word):            
             page = cls.get_verb_page( word )
@@ -61,12 +46,12 @@ class Priberam(object):
                         yield i
             
             for i in indexes_to_pop():
-                # print 'poping: ', conjugations[i]
                 conjugations = conjugations[:i] + conjugations[i+1:]
             return conjugations
     
 
     class AAO(API):
+        class_name = 'aAO'
         cookies = {
             'DLPO_LanguageID': '2070',
             'DLPO_AntesAcordo': 'True',
@@ -76,6 +61,7 @@ class Priberam(object):
         }
         
     class DAO(API):
+        class_name = 'dAO'
         cookies = {
             'DLPO_LanguageID': '2070',
             'DLPO_AntesAcordo': 'False',

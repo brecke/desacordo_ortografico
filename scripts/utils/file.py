@@ -2,24 +2,24 @@
 # encoding: utf-8
 import codecs
 
-class File(object):
-    filename = "mappings.js"
-        
-    @classmethod    
-    def __dict_to_str(self, d):
-        l = []
-        for k,v in d.iteritems():
-            try:
-                if k and v:
-                    l.append( u"\t'"+unicode(k)+"': '"+unicode(v)+"',\n" )
-            except UnicodeDecodeError:
-                continue         
-        return u"var mappings = {\n" + "".join(l) + u"}"
-
-    @classmethod
+class File(object):    
+    def __init__(self, filename):
+        self.filename = filename
+    
     def write(self, dic):
+        
+        def get_text(): 
+            lines = []
+            for key,value in dic.iteritems():
+                try:
+                    if key and value:
+                        lines.append( u"\t'"+unicode(key)+"': '"+unicode(value)+"'" )
+                except UnicodeDecodeError:
+                    continue         
+            return u"var mappings = {\n" + ",\n".join(lines) + u"}"
+        
         file_ = codecs.open( self.filename, "w", "utf-8" )
-        file_.write( self.__dict_to_str(dic) )
+        file_.write( get_text() )
         file_.close()
     
     

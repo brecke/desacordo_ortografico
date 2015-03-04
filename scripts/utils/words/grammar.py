@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from utils.consts import PREPOSITIONS, PREFIXOS
+from utils.consts import PREPOSITIONS, PREFIXES
 from utils.exceptions import MultipleOptions
 
 
@@ -9,42 +9,44 @@ class Grammar(str):
     @classmethod
     def get_form(cls, word, formname):
         
-        def apply_form(word_to_apply_form, rejoin_method=None):
-            instance = cls(word_to_apply_form)
+        def apply_form(word, rejoin=None):
             try:
-                if formname == 'plural':
-                    new_word = instance.to_plural()
-                else:
-                    new_word = instance.to_feminine()
-                if rejoin_method:
-                    return rejoin_method( new_word )
-                return new_word
+                new_word = getattr(cls(word), 'to_'+formname)()
+                return rejoin( new_word ) if rejoin else new_word
             except MultipleOptions as e:
-                if rejoin_method:
-                    e.parent_options = [rejoin_method(each) for each in e.options]
+                if rejoin:
+                    e.parent_options = [rejoin(each) for each in e.options]
                 raise e
         
         def apply_hifen_rules(sep):
             subwords = word.split( sep )
-            if len(subwords) == 2: # and splited[0] in PREPOSITIONS:
-                rejoin = lambda x: sep.join([subwords[0], x])
-                return apply_form( subwords[1], rejoin )
+            if len(subwords) == 2:
+                return apply_form(
+                    word   = subwords[1], 
+                    rejoin = lambda x: sep.join([subwords[0], x])
+                )
             elif len(subwords) >= 3 and subwords[1] in PREPOSITIONS:
-                rejoin = lambda x: sep.join( [x] + subwords[1:] )
-                return apply_form( subwords[0], rejoin )
-            return apply_form( word )
+                return apply_form( 
+                    word   = subwords[0], 
+                    rejoin = lambda x: sep.join([x] + subwords[1:])
+                )
+            return apply_form( word=word )
             
         def apply_composite_rules():
-            for each in PREFIXOS:
+            for each in PREFIXES:
                 if word.startswith( each ):
                     subword = word[len(each):]
                     if subword[0] == subword[1]:
-                        rejoin = lambda x: each + subword[0] + x
-                        return apply_form( subword[1:], rejoin )
+                        return apply_form( 
+                            word   = subword[1:], 
+                            rejoin = lambda x: each + subword[0] + x
+                        )
                     else:
-                        rejoin = lambda x: each + x
-                        return apply_form( subword, rejoin )
-            return apply_form( word )
+                        return apply_form(
+                            word   = subword, 
+                            rejoin = lambda x: each + x
+                        )
+            return apply_form( word=word )
                 
         if "-" in word:
             return apply_hifen_rules(sep="-")
@@ -52,14 +54,6 @@ class Grammar(str):
             return apply_hifen_rules(sep=" ")
         else:
             return apply_composite_rules()
-    
-    @classmethod
-    def get_plural_form(cls, word):
-        return cls.get_form(word, 'plural')
-    
-    @classmethod
-    def get_feminine_form(cls, word):
-        return cls.get_form(word, 'feminine')
     
     def to_plural(self):
         """
@@ -167,10 +161,10 @@ class Grammar(str):
 class Plural(object):
     @classmethod
     def get(cls, word):
-        return Grammar.get_plural_form( word )
+        return Grammar.get_form( word, 'plural' )
 
 
 class Feminine(object):
     @classmethod
     def get(cls, word):
-        return Grammar.get_feminine_form( word )
+        return Grammar.get_form( word, 'feminine' )

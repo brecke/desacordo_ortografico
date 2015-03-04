@@ -12,7 +12,5 @@ class HTTP(object):
             return cls.get(url, cookies, whitespaces)
         else:
             clean = lambda x: " ".join( x.replace( '\n', '' ).split() )
-            if whitespaces:
-                return response
-            return clean(response)
+            return response if whitespaces else clean(response)
             

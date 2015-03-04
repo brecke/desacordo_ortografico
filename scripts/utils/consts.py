@@ -10,24 +10,11 @@ PREPOSITIONS = [
     "sem", "sob", "sobre", "trás", "no", "nos", "anti", "auto", #"para"
 ]
 
-PREFIXOS = [
+PREFIXES = [
     "auto", "anti", "re", "speudo", "foto", "ultra", "sobre", "sub", "electro",
-    "eletro", "bi", "contra", "info", "in", "dis",
+    "eletro", "bi", "contra", "info", "in", "dis", "proto", "quimio","infra", 
+    "imuno", "co", "tele", "super", "retro", "hetero",
 ]
-
-# response = requests.get('http://pt.wikipedia.org/wiki/Lista_de_prefixos_e_radicais_gregos_e_latinos')
-# tree = html.fromstring(response.text)
-# for each in tree.xpath('//table')[:2]:
-#     table = html.fromstring( html.tostring(each) )
-#     for row in table.xpath('//tr'):
-#         element = html.fromstring( html.tostring(row) )
-#         cells =  element.xpath('//td')
-#         if cells:
-#             for word in cells[0].split(','):
-#                 word = word.strip()
-#                 if word.endswith('-'):
-#                     word = word[:-1]
-#                 PREFIXOS.append( word )
 
 
 PLURAL_REGEXES = [
