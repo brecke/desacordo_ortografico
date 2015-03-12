@@ -14487,6 +14487,9 @@ for(var i = 0; i < textNodes.length; i++) {
     text = text.replace(')', ' ');
     text = text.replace('«', ' ');
     text = text.replace('»', ' ');
+    
+    text = text.replace(',', ' ');
+    text = text.replace('!', ' ');
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
@@ -14502,7 +14505,7 @@ for(var i = 0; i < textNodes.length; i++) {
            } else if ( isUpperCase(word) ) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toUpperCase());
            } else {
-               textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toLowerCase());
+               textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord);
            };
        };
     }

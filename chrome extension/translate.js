@@ -84,6 +84,8 @@ function translate(createOverlay, removeOverlay) {
     text = text.replace('«', ' ');
     text = text.replace('»', ' ');
 
+    text = text.replace(',', ' ');
+    text = text.replace('!', ' ');
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
@@ -98,7 +100,7 @@ function translate(createOverlay, removeOverlay) {
            } else if (isUpperCase(word)) {
                textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toUpperCase());
            } else {
-               textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord.toLowerCase());
+               textNodes[i].textContent = textNodes[i].textContent.replace(word, replaceWord);
            };
        };
     }
