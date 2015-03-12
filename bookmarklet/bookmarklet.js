@@ -14468,14 +14468,12 @@ for(var i = 0; i < textNodes.length; i++) {
 
     text = $.trim(textNodes[i].textContent);
 
-    toReplace = [
-        ':', '...', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', 
-        '’', ';', '(', ')', '«', '»', ',', '!',
-    ]
-    for (var i = 0; i < toReplace.length; i++) {
+    toReplace = [':', '...', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', '’', ';', '(', ')', '«', '»', ',', '!'];
+    for (var j = 0; j < toReplace.length; j++) {
         // replace via regex
-        text = text.replace(toReplace[i], ' ');
-    }
+        re = new RegExp('\\'+toReplace[j], 'g');
+        text = text.replace(re, ' ');
+    };
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
