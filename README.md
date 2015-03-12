@@ -10,7 +10,12 @@ Este repositório tem 3 pastas:
 
 ## Porquê ##
 
-Não pretendo evangelizar ninguém, cada um tem os seus motivos. Se quiseres usar, usa. Se não quiseres, temos pena.
+Não há coisa mais aberrante do que uns mentecaptos a tentar "evoluir" a
+língua à força e por decreto. Esta idiotice tem de acabar (e rápido), e esta
+iniciativa é uma forma de devolver a sanidade às vítimas deste aborto
+ortográfico.
+
+Voltemos a ler em bom Português.
 
 ## Posso contribuir? ##
 
