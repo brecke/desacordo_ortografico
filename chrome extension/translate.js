@@ -64,28 +64,14 @@ function translate(createOverlay, removeOverlay) {
 
     text = $.trim(textNodes[i].textContent);
 
-    // replace via regex
-    text = text.replace(':', ' ');
-    text = text.replace('...', ' ');
-    text = text.replace('.', ' ');
-    text = text.replace('?', ' ');
-    // text = text.replace('\'', '');
-    text = text.replace('_', ' ');
-    text = text.replace('@', ' ');
-
-    text = text.replace('”', ' ');
-    text = text.replace('“', ' ');
-    text = text.replace('‘', ' ');
-    text = text.replace('’', ' ');
-
-    text = text.replace(';', ' ');
-    text = text.replace('(', ' ');
-    text = text.replace(')', ' ');
-    text = text.replace('«', ' ');
-    text = text.replace('»', ' ');
-
-    text = text.replace(',', ' ');
-    text = text.replace('!', ' ');
+    toReplace = [
+        ':', '...', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', 
+        '’', ';', '(', ')', '«', '»', ',', '!',
+    ]
+    for (var i = 0; i < toReplace.length; i++) {
+        // replace via regex
+        text = text.replace(toReplace[i], ' ');
+    }
 
     text = $.trim(text);
     tokens = text.split(/[\s,]+/);
