@@ -14468,7 +14468,7 @@ for(var i = 0; i < textNodes.length; i++) {
 
     text = $.trim(textNodes[i].textContent);
 
-    toReplace = [':', '...', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', '’', ';', '(', ')', '«', '»', ',', '!'];
+    toReplace = [':', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', '’', ';', '(', ')', '«', '»', ',', '!'];
     for (var j = 0; j < toReplace.length; j++) {
         // replace via regex
         re = new RegExp('\\'+toReplace[j], 'g');

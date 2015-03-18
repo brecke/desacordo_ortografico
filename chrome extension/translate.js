@@ -64,8 +64,13 @@ function translate(createOverlay, removeOverlay) {
   for(var i = 0; i < textNodes.length; i++) {
 
     text = $.trim(textNodes[i].textContent);
+    
+    flag = false;
+    if (text.indexOf('Cole')>=0) {
+        flag = true;
+    };
 
-    toReplace = [':', '...', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', '’', ';', '(', ')', '«', '»', ',', '!'];
+    toReplace = [':', '.', '?', '_', '@', '?', '"', "'", '”', '“', '‘', '’', ';', '(', ')', '«', '»', ',', '!'];
     for (var j = 0; j < toReplace.length; j++) {
         // replace via regex
         re = new RegExp('\\'+toReplace[j], 'g');
@@ -77,10 +82,6 @@ function translate(createOverlay, removeOverlay) {
 
     for (var j = 0; j < tokens.length; j++) {
       word = tokens[j];
-      if (word.indexOf('atra')>=0) {
-          console.log(word);
-          console.log('---');
-      };
       replaceWord = mappings[ word.toLowerCase() ];
 
        if (replaceWord) {
