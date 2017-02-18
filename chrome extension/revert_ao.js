@@ -3,7 +3,7 @@ $(document).ready(function() {
     chrome.extension.sendMessage ({ method: "getLocalStorage", key: "auto"}, function (response) {
         autoSetting = response.data;
 
-        if (autoSetting == "true" || autoSetting == "undefined") {
+        if (autoSetting === "true" || autoSetting === "undefined") {
             injectOverlayElement();
             translate( reverseOverlay );
         }

@@ -11,13 +11,13 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="styles/options.css">
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Crafty+Girls'>
-    <link rel='stylesheet' type='text/css' href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
-    <link rel='stylesheet' type='text/css' href="styles/bootstrapSwitch.css">
+    <link rel='stylesheet' type='text/css' href="styles/bootstrap.min.css">
+    <link rel="stylesheet" type='text/css' href="styles/bootstrap-toggle.min.css">
 
     <!-- Imported scripts -->
     <script src="modernizr.foundation.js"></script>
     <script src="jquery.min.js"></script>
-    <script src="bootstrapSwitch.js"></script>
+    <script src="bootstrap-toggle.min.js"></script>
 
     <style type="text/css">
       body {
@@ -43,10 +43,6 @@
         font-size: 72px;
         line-height: 1;
       }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-      }
 
       /* Supporting marketing content */
       .marketing {
@@ -56,7 +52,6 @@
         margin-top: 28px;
       }
     </style>
-    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -67,14 +62,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+      <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+      <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
   <body>
-
     <div class="container-narrow">
-
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="https://chrome.google.com/webstore/detail/desacordo-ortogr%C3%A1fico/bgimoiinoakcghlnknjaiadgafgcdiim">Chrome</a></li>
@@ -97,9 +90,7 @@
         <!-- the fieldset -->
           <fieldset>
             Tradução automática:
-            <div class="switch" id="mySwitch" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
-              <input type="checkbox">
-            </div>
+              <input id="togglebox" type="checkbox" checked data-toggle="toggle" data-size="small">
           </fieldset>
       </div>
 
