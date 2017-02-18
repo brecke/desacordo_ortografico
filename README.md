@@ -1,4 +1,4 @@
-![Ah e tal agora escreve-se assim...](https://raw.github.com/brecke/desacordo_ortografico/master/images/fuck-that-bitch-yao-ming.png)
+![Ah e tal agora escreve-se assim...](https://d3uepj124s5rcx.cloudfront.net/items/470W3n131S2K0W2t0V0y/Screen%20Recording%202017-02-18%20at%2001.58%20PM.gif)
 
 # Desacordo Ortográfico
 
