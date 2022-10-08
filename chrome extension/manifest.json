@@ -15,8 +15,7 @@
   },
 
   "permissions": [
-    "tabs",
-    "http://*/*"
+    "activeTab"
   ],
 
   "content_scripts": [

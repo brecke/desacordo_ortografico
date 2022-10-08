@@ -6,7 +6,6 @@ $(function () {
   });
     
   $('#togglebox').change(function () {
-    console.log("yay!");
     localStorage["auto"] = $(this).prop('checked');
   });
 });
